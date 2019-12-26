@@ -1,6 +1,6 @@
 # day_planner
 
-Calendar application is a simple browswer based application that allows user to save events for each hour of the day. The technology its using is JQuery, Moment js library, Javascript local storage, Bootstrap so that it is responsive. 
+Calendar application is a simple browser based application that allows user to save events for each hour of the day. The technology its using is JQuery, Moment js library, Javascript local storage, Bootstrap so that it is responsive. 
 
 The application shows the day when you launch it.
 
