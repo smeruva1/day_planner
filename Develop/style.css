@@ -2,18 +2,24 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
-}
+  }
 
 textarea{
   background: transparent;
-  border: none;
-  resize: none;
+  /* border: none; */
+ border: line;
+  /* border: 1px solid black; */
+  resize: none; 
   color: #000000;
   border-left: 1px solid black;
-  padding: 10px;
-}
+  border-right: 1px solid black;
+  /* padding-bottom: -30px; 
+  margin-bottom: -36px;
+   /* max-width: 800px;  */
+   height : 60px;
+} 
 
-.jumbotron {
+.myjumbotron {
   text-align: center;
   background-color: transparent;
   color: black;
@@ -32,7 +38,7 @@ textarea{
 
 .row {
   white-space: pre-wrap;
-  height: 80px;
+  /* height: 80px; */
   border-top: 1px solid white;;
 }
 
@@ -40,6 +46,12 @@ textarea{
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  text-align: center;
+  vertical-align: text-top;
+  /* padding-top: -20px;
+  padding-bottom: 20px; 
+  height: 50px; 
+  padding: 10px; */
 }
 
 .past {
@@ -58,11 +70,16 @@ textarea{
 }
 
 .saveBtn {
-  border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border: line;
+  /* border-left: 1px solid black; */
+   border-radius: 6px;
+  /* border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px; */
   background-color: #06AED5;
   color: white;
+  /* width: 80px; */
+   height: 60px;
+  padding: 0px;
 }
 
 .saveBtn i:hover {

@@ -14,65 +14,150 @@
 </head>
 
 <body>
-  <header class="jumbotron">
-    <h1 class="display-3">Work Day Scheduler</h1>
-    <p class="lead">A simple calendar app for scheduling your work day</p>
-    <p id="currentDay" class="lead"></p>
-  </header>
-  <div class="container">
-    <!-- Timeblocks go here -->
+
+  <!-- Container Div -->
+  <div class="wrapper container">
+
+    <!-- Row 1 Header-->
+    <div class="row">
+      <div class="col-md-12">
+
+        <header class="myjumbotron">
+
+          <h1 class="display-3">Work Day Scheduler</h1>
+          <p class="lead">A simple calendar app for scheduling your work day</p>
+          <p id="currentDay" class="lead"></p>
+
+        </header>
+      </div>
+    </div>
+
+    <!-- Row 2 9 AM Header-->
+    <div class="row" , id="dayplannerblocks">
+      <!-- Timeblocks go here -->
+      <!-- <ul id="timeblocks-list"></ul> -->
+
+    </div>
+    <!-- </div> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script>
+
+      //var currentDayEl = document.querySelector("#currentDay");
+      // console.log(currentDayEl);
+      // console.log(moment().format('dddd MMMM Do YYYY'));
+      // currentDayEl.textContent = moment().format('dddd MMMM Do YYYY');
+
+      //Use JQuery and moment to show the day
+      var $currentDay = $("#currentDay");
+      console.log($currentDay);
+      $currentDay.text(moment().format('dddd MMMM Do YYYY'));
+
+
+      //Now add 9 li to ul
+      //var $timeblockList = $("#timeblocks-list");
+      // var $timeblockList = $("#timeblocks-list");
+      var $dayplannerblocks = $("#dayplannerblocks");
+
+      var timeblockArray = ["09 AM", "10 AM", "11 AM", "12 PM", "01 PM", "02 PM", "03 PM", "04 PM", "05 PM"];
+
+      var currentIndex = 0;
+      //get the current time Array indices and set the flag.
+      console.log(moment().format("hh A"));
+
+      for (var i = 0; i < timeblockArray.length; i++) {
+        if (moment().format("hh A") === timeblockArray[i]) {
+          currentIndex = i;
+        }
+      }
+      console.log("current array index is " + currentIndex + " and time is: " + timeblockArray[currentIndex]);
+
+      // // Render a new li for each todo
+      // for (var i = 0; i < timeblockArray.length; i++) {
+
+      //   var startoftheHour = timeblockArray[i];
+
+      //   var li = document.createElement("li");
+      //   li.setAttribute("data-index", i);
+
+      //   var labelHr = document.createElement("label");
+      //   labelHr.textContent = startoftheHour;
+      //   li.appendChild(labelHr);
+
+      //   var textarea = document.createElement("textarea");
+      //   textarea.textContent = " enter your text here";
+      //   li.appendChild(textarea);
+
+      //   var button = document.createElement("button");
+      //   button.textContent = "save";
+      //   li.appendChild(button);
+      //   li.setAttribute("class", "saveBtn");
+
+      //   $timeblockList.append(li);
+      // }
+
+      // 9 AM Block ==============================>>
+
+      var startoftheHour9 = timeblockArray[0];
+
+      // var labelHr9 = document.createElement("label");
+      // labelHr9.textContent = startoftheHour9;
+      // labelHr9.setAttribute("class", "hour col-md-2");
+      // $dayplannerblocks.append(labelHr9);
+
+      var $labelHr9 = $("<label>");
+      $labelHr9.text(startoftheHour9);
+      $labelHr9.attr("class", "hour col-md-2");
+      $dayplannerblocks.append($labelHr9);
+
+
+      // var textarea = document.createElement("textarea");
+      // textarea.textContent = "";
+      // textarea.setAttribute("class", "textarea col-md-9");
+      // console.log("current array index is " + currentIndex);
+
+      // if (parseInt(currentIndex) < parseInt(0)) {
+      //   textarea.setAttribute("class", "textarea col-md-9 past");
+      // } else if (parseInt(currentIndex) === parseInt(0)) {
+      //   textarea.setAttribute("class", "textarea col-md-9 present");
+      // } else if (parseInt(currentIndex) > parseInt(0)) {
+      //   console.log("hi");
+      //   textarea.setAttribute("class", "textarea col-md-9 future");
+      // }
+
+      // $dayplannerblocks.append(textarea);
+
+      var $textarea9 = $("<textarea>");
+      $textarea9.text("");
+      $textarea9.attr("class", "textarea col-md-9");
+
+      if (parseInt(currentIndex) < parseInt(0)) {
+        $textarea9.attr("class", "textarea col-md-9 past");
+      } else if (parseInt(currentIndex) === parseInt(0)) {
+        $textarea9.attr("class", "textarea col-md-9 present");
+      } else if (parseInt(currentIndex) > parseInt(0)) {
+        console.log("hi");
+        $textarea9.attr("class", "textarea col-md-9 future");
+      }
+
+      $dayplannerblocks.append($textarea9);
+
+      // var button = document.createElement("button");
+      // button.textContent = "save";
+      // button.setAttribute("class", "saveBtn col-md-1");
+      // dayplannerblocks.appendChild(button);
+
+      var $saveBtn9 = $("<button>");
+      $saveBtn9.text("Save");
+      $saveBtn9.attr("class", "saveBtn col-md-1");
+      $dayplannerblocks.append($saveBtn9);
+
+
+
+
+    </script>
   </div>
-
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-  <script>
-
-    //var currentDayEl = document.querySelector("#currentDay");
-    
-    // console.log(currentDayEl);
-    // console.log(moment().format('dddd MMMM Do YYYY'));
-
-    // currentDayEl.textContent = moment().format('dddd MMMM Do YYYY');
-
-    var $currentDay = $("#currentDay");
-    console.log($currentDay);
-    $currentDay.text(moment().format('dddd MMMM Do YYYY'));
-
-
-    // var newDiv = $("<div>");
-    // newDiv.text("A pleasure to meet you!");
-    // $(".jumbotron").append(newDiv);
-
-    // console.log(moment());
-    // console.log(moment().format('LLLL', "dddd, MMMM D, YYYY"));
-    // console.log(moment().format('dddd MMMM Do YYYY'));
-    // console.log(moment().toString());
-
-
-
-    //console.log(moment().startOf('day'));
-    //Create moment date time
-//     var m = moment();
-
-//     console.log(m.toString());
-//     console.log(m.toISOString());
-
-//     //create moment obj from ISO 8601 String
-//     var n = moment("2019-05-19");
-
-//     console.log(n.toString());
-//     console.log(n.toISOString());
-
-
-// //create moment obj from ISO 8601 String with time
-// var q = moment("2019-05-19:10:00.000");
-
-// console.log(q.toString());
-// console.log(q.toISOString());
-
-  </script>
-
 </body>
 
 </html>
