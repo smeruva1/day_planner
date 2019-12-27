@@ -30,30 +30,26 @@
 
       </div>
     </div>
+    <br>
 
     <!-- Row 2 9 AM Header-->
-    <form id="event-form" method="POST">
+    <!-- <form id="event-form" method="POST"> -->
 
-      <div class="row" id="dayplannerblocks">
+    <div class="row" id="dayplannerblocks">
 
-        <!-- Timeblocks go here -->
-        <!-- <ul id="timeblocks-list"></ul> -->
-        <!-- <div id="dayplannerblocks">
+      <!-- Timeblocks go here -->
+      <!-- <ul id="timeblocks-list"></ul> -->
+      <!-- <div id="dayplannerblocks">
         </div> -->
 
-      </div>
-    </form>
+    </div>
+    <!-- </form> -->
 
     <!-- </div> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script>
-
-      //var currentDayEl = document.querySelector("#currentDay");
-      // console.log(currentDayEl);
-      // console.log(moment().format('dddd MMMM Do YYYY'));
-      // currentDayEl.textContent = moment().format('dddd MMMM Do YYYY');
 
       //Use JQuery and moment to show the day
       var $currentDay = $("#currentDay");
@@ -64,111 +60,487 @@
       var timeblockArray = ["09 AM", "10 AM", "11 AM", "12 PM", "01 PM", "02 PM", "03 PM", "04 PM", "05 PM"];
 
       //get the current time Array indices and set the flag.
-      console.log(moment().format("hh A"));
+      // console.log(moment().hour());
 
-      // 9 AM Block =============================>>
-      // 9 AM Block =============================>>
-      // 9 AM Block =============================>>
+      //Init onload function to add 9 blocks and also read local storage.
+      function init() {
 
-      var startoftheHour9 = timeblockArray[0];
+        // 9 AM Block =============================>>
+        // 9 AM Block =============================>>
+        // 9 AM Block =============================>>
 
-      // var labelHr9 = document.createElement("label");
-      // labelHr9.textContent = startoftheHour9;
-      // labelHr9.setAttribute("class", "hour col-md-2");
-      // $dayplannerblocks.append(labelHr9);
+        var startoftheHour9 = timeblockArray[0];
 
-      var $labelHr9 = $("<label>");
-      $labelHr9.text(startoftheHour9);
-      $labelHr9.attr("class", "hour col-md-2");
-      $dayplannerblocks.append($labelHr9);
 
-      // var textarea = document.createElement("textarea");
-      // textarea.textContent = "";
-      // textarea.setAttribute("class", "textarea col-md-9");
-      // console.log("current array index is " + currentIndex);
+        var $labelHr9 = $("<label>");
+        $labelHr9.text(startoftheHour9);
+        $labelHr9.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr9);
 
-      // if (parseInt(currentIndex) < parseInt(0)) {
-      //   textarea.setAttribute("class", "textarea col-md-9 past");
-      // } else if (parseInt(currentIndex) === parseInt(0)) {
-      //   textarea.setAttribute("class", "textarea col-md-9 present");
-      // } else if (parseInt(currentIndex) > parseInt(0)) {
-      //   console.log("hi");
-      //   textarea.setAttribute("class", "textarea col-md-9 future");
-      // }
+        $textarea9 = $("<textarea>");
+        $textarea9.text("");
+        $textarea9.attr("class", "textarea col-md-9");
+        $textarea9.attr("data-hr", startoftheHour9);
+        console.log($textarea9);
 
-      // $dayplannerblocks.append(textarea);
+        if (moment().hour() < 9) {
+          $textarea9.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 9) {
+          $textarea9.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 9) {
+          $textarea9.attr("class", "textarea col-md-9 present");
+        }
 
-      var $textarea9 = $("<textarea>");
-      $textarea9.text("");
-      $textarea9.attr("class", "textarea col-md-9");
+        var storedtextarea9 = localStorage.getItem("event9AM");
+        console.log("what is in the local storage var event9AM: " + storedtextarea9);
 
-      if (moment().hour() < 9) {
-        $textarea9.attr("class", "textarea col-md-9 future");
-      } else if (moment().hour() > 9) {
-        $textarea9.attr("class", "textarea col-md-9 past");
-      } else if (moment().format("hh A") === 9) {
-        $textarea9.attr("class", "textarea col-md-9 present");
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea9 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea9.text(storedtextarea9);
+        }
+
+        $dayplannerblocks.append($textarea9);
+
+        $saveBtn9 = $("<button>");
+        $saveBtn9.text("Save");
+        $saveBtn9.attr("class", "saveBtn col-md-1");
+        // $saveBtn9.attr("img", "src=../Assets/images/save.png");
+        $saveBtn9.attr("data-hr", startoftheHour9);
+        console.log($saveBtn9);
+        console.log("******* data-hr value is: " + $saveBtn9.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn9);
+
+
+
+
+
+        // 10 AM Block =============================>>
+        // 10 AM Block =============================>>
+        // 10 AM Block =============================>>
+
+        var startoftheHour10 = timeblockArray[1];
+
+
+        var $labelHr10 = $("<label>");
+        $labelHr10.text(startoftheHour10);
+        $labelHr10.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr10);
+
+        $textarea10 = $("<textarea>");
+        $textarea10.text("");
+        $textarea10.attr("class", "textarea col-md-9");
+        $textarea10.attr("data-hr", startoftheHour10);
+        console.log($textarea10);
+
+        if (moment().hour() < 10) {
+          $textarea10.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 10) {
+          $textarea10.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 10) {
+          $textarea10.attr("class", "textarea col-md-9 present");
+        }
+
+        var storedtextarea10 = localStorage.getItem("event10AM");
+        console.log("what is in the local storage var event10AM: " + storedtextarea10);
+
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea10 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea10.text(storedtextarea10);
+        }
+
+        $dayplannerblocks.append($textarea10);
+
+        $saveBtn10 = $("<button>");
+        $saveBtn10.text("Save");
+        $saveBtn10.attr("class", "saveBtn col-md-1");
+        // $saveBtn10.attr("img", "src=../Assets/images/save.png");
+        $saveBtn10.attr("data-hr", startoftheHour10);
+        console.log($saveBtn10);
+        console.log("******* data-hr value is: " + $saveBtn10.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn10);
+
+
+
+
+
+
+        // 11 AM Block =============================>>
+        // 11 AM Block =============================>>
+        // 11 AM Block =============================>>
+
+        var startoftheHour11 = timeblockArray[2];
+
+
+        var $labelHr11 = $("<label>");
+        $labelHr11.text(startoftheHour11);
+        $labelHr11.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr11);
+
+        $textarea11 = $("<textarea>");
+        $textarea11.text("");
+        $textarea11.attr("class", "textarea col-md-9");
+        $textarea11.attr("data-hr", startoftheHour11);
+        console.log($textarea11);
+
+        if (moment().hour() < 11) {
+          $textarea11.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 11) {
+          $textarea11.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 11) {
+          $textarea11.attr("class", "textarea col-md-9 present");
+        }
+
+        var storedtextarea11 = localStorage.getItem("event11AM");
+        console.log("what is in the local storage var event11AM: " + storedtextarea11);
+
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea11 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea11.text(storedtextarea11);
+        }
+
+        $dayplannerblocks.append($textarea11);
+
+        $saveBtn11 = $("<button>");
+        $saveBtn11.text("Save");
+        $saveBtn11.attr("class", "saveBtn col-md-1");
+        // $saveBtn11.attr("img", "src=../Assets/images/save.png");
+        $saveBtn11.attr("data-hr", startoftheHour11);
+        console.log($saveBtn11);
+        console.log("******* data-hr value is: " + $saveBtn11.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn11);
+
+
+
+
+        // 12 PM Block =============================>>
+        // 12 PM Block =============================>>
+        // 12 PM Block =============================>>
+
+        var startoftheHour12 = timeblockArray[3];
+
+
+        var $labelHr12 = $("<label>");
+        $labelHr12.text(startoftheHour12);
+        $labelHr12.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr12);
+
+        $textarea12 = $("<textarea>");
+        $textarea12.text("");
+        $textarea12.attr("class", "textarea col-md-9");
+        $textarea12.attr("data-hr", startoftheHour12);
+        console.log($textarea12);
+
+        if (moment().hour() < 12) {
+          $textarea12.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 12) {
+          $textarea12.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 12) {
+          $textarea12.attr("class", "textarea col-md-9 present");
+        }
+
+        var storedtextarea12 = localStorage.getItem("event12PM");
+        console.log("what is in the local storage var event12PM: " + storedtextarea12);
+
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea12 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea12.text(storedtextarea12);
+        }
+
+        $dayplannerblocks.append($textarea12);
+
+        $saveBtn12 = $("<button>");
+        $saveBtn12.text("Save");
+        $saveBtn12.attr("class", "saveBtn col-md-1");
+        // $saveBtn12.attr("img", "src=../Assets/images/save.png");
+        $saveBtn12.attr("data-hr", startoftheHour12);
+        console.log($saveBtn12);
+        console.log("******* data-hr value is: " + $saveBtn12.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn12);
+
+
+        // 13 PM Block =============================>>
+        // 13 PM Block =============================>>
+        // 13 PM Block =============================>>
+
+        var startoftheHour13 = timeblockArray[4];
+
+
+        var $labelHr13 = $("<label>");
+        $labelHr13.text(startoftheHour13);
+        $labelHr13.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr13);
+
+        $textarea13 = $("<textarea>");
+        $textarea13.text("");
+        $textarea13.attr("class", "textarea col-md-9");
+        $textarea13.attr("data-hr", startoftheHour13);
+        console.log($textarea13);
+
+        if (moment().hour() < 13) {
+          $textarea13.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 13) {
+          $textarea13.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 13) {
+          $textarea13.attr("class", "textarea col-md-9 present");
+        }
+
+        var storedtextarea13 = localStorage.getItem("event1PM");
+        console.log("what is in the local storage var event1PM: " + storedtextarea13);
+
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea13 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea13.text(storedtextarea13);
+        }
+
+        $dayplannerblocks.append($textarea13);
+
+        $saveBtn13 = $("<button>");
+        $saveBtn13.text("Save");
+        $saveBtn13.attr("class", "saveBtn col-md-1");
+        // $saveBtn13.attr("img", "src=../Assets/images/save.png");
+        $saveBtn13.attr("data-hr", startoftheHour13);
+        console.log($saveBtn13);
+        console.log("******* data-hr value is: " + $saveBtn13.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn13);
+
+
+        // 14 PM Block =============================>>
+        // 14 PM Block =============================>>
+        // 14 PM Block =============================>>
+
+        var startoftheHour14 = timeblockArray[5];
+
+
+        var $labelHr14 = $("<label>");
+        $labelHr14.text(startoftheHour14);
+        $labelHr14.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr14);
+
+        $textarea14 = $("<textarea>");
+        $textarea14.text("");
+        $textarea14.attr("class", "textarea col-md-9");
+        $textarea14.attr("data-hr", startoftheHour14);
+        console.log($textarea14);
+
+        if (moment().hour() < 14) {
+          $textarea14.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 14) {
+          $textarea14.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 14) {
+          $textarea14.attr("class", "textarea col-md-9 present");
+        }
+
+        var storedtextarea14 = localStorage.getItem("event2PM");
+        console.log("what is in the local storage var event2PM: " + storedtextarea14);
+
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea14 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea14.text(storedtextarea14);
+        }
+
+        $dayplannerblocks.append($textarea14);
+
+        $saveBtn14 = $("<button>");
+        $saveBtn14.text("Save");
+        $saveBtn14.attr("class", "saveBtn col-md-1");
+        // $saveBtn14.attr("img", "src=../Assets/images/save.png");
+        $saveBtn14.attr("data-hr", startoftheHour14);
+        console.log($saveBtn14);
+        console.log("******* data-hr value is: " + $saveBtn14.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn14);
+
+
+        // 15 PM Block =============================>>
+        // 15 PM Block =============================>>
+        // 15 PM Block =============================>>
+
+        var startoftheHour15 = timeblockArray[6];
+
+
+        var $labelHr15 = $("<label>");
+        $labelHr15.text(startoftheHour15);
+        $labelHr15.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr15);
+
+        $textarea15 = $("<textarea>");
+        $textarea15.text("");
+        $textarea15.attr("class", "textarea col-md-9");
+        $textarea15.attr("data-hr", startoftheHour15);
+        console.log($textarea15);
+
+        if (moment().hour() < 15) {
+          $textarea15.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 15) {
+          $textarea15.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 15) {
+          $textarea15.attr("class", "textarea col-md-9 present");
+        }
+
+        var storedtextarea15 = localStorage.getItem("event3PM");
+        console.log("what is in the local storage var event3PM: " + storedtextarea15);
+
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea15 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea15.text(storedtextarea15);
+        }
+
+        $dayplannerblocks.append($textarea15);
+
+        $saveBtn15 = $("<button>");
+        $saveBtn15.text("Save");
+        $saveBtn15.attr("class", "saveBtn col-md-1");
+        // $saveBtn15.attr("img", "src=../Assets/images/save.png");
+        $saveBtn15.attr("data-hr", startoftheHour15);
+        console.log($saveBtn15);
+        console.log("******* data-hr value is: " + $saveBtn15.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn15);
+
+
+        // 16 PM Block =============================>>
+        // 16 PM Block =============================>>
+        // 16 PM Block =============================>>
+
+        var startoftheHour16 = timeblockArray[7];
+
+
+        var $labelHr16 = $("<label>");
+        $labelHr16.text(startoftheHour16);
+        $labelHr16.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr16);
+
+        $textarea16 = $("<textarea>");
+        $textarea16.text("");
+        $textarea16.attr("class", "textarea col-md-9");
+        $textarea16.attr("data-hr", startoftheHour16);
+        console.log($textarea16);
+
+        console.log(moment().hour());
+        console.log(moment().hour());
+        console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+
+        if (moment().hour() < 16) {
+          $textarea16.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 16) {
+          $textarea16.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 16) {
+          $textarea16.attr("class", "textarea col-md-9 present");
+        }
+
+        var storedtextarea16 = localStorage.getItem("event4PM");
+        console.log("what is in the local storage var event4PM: " + storedtextarea16);
+
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea16 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea16.text(storedtextarea16);
+        }
+
+        $dayplannerblocks.append($textarea16);
+
+        $saveBtn16 = $("<button>");
+        $saveBtn16.text("Save");
+        $saveBtn16.attr("class", "saveBtn col-md-1");
+        // $saveBtn16.attr("img", "src=../Assets/images/save.png");
+        $saveBtn16.attr("data-hr", startoftheHour16);
+        console.log($saveBtn16);
+        console.log("******* data-hr value is: " + $saveBtn16.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn16);
+
+
+        // 17 PM Block =============================>>
+        // 17 PM Block =============================>>
+        // 17 PM Block =============================>>
+
+        var startoftheHour17 = timeblockArray[8];
+
+
+        var $labelHr17 = $("<label>");
+        $labelHr17.text(startoftheHour17);
+        $labelHr17.attr("class", "hour col-md-2");
+        $dayplannerblocks.append($labelHr17);
+
+        $textarea17 = $("<textarea>");
+        $textarea17.text("");
+        $textarea17.attr("class", "textarea col-md-9");
+        $textarea17.attr("data-hr", startoftheHour17);
+        console.log($textarea17);
+
+        if (moment().hour() < 17) {
+          $textarea17.attr("class", "textarea col-md-9 future");
+        } else if (moment().hour() > 17) {
+          $textarea17.attr("class", "textarea col-md-9 past");
+        } else if (moment().hour() === 17) {
+          $textarea17.attr("class", "textarea col-md-9 present");
+        }
+
+        var storedtextarea17 = localStorage.getItem("event5PM");
+        console.log("what is in the local storage var event5PM: " + storedtextarea17);
+
+        // If events were retrieved from localStorage, update the textarea to it
+        if (storedtextarea17 !== null) {
+          console.log("looks like there is data in localstorage so reading it from there");
+          $textarea17.text(storedtextarea17);
+        }
+
+        $dayplannerblocks.append($textarea17);
+
+        $saveBtn17 = $("<button>");
+        $saveBtn17.text("Save");
+        $saveBtn17.attr("class", "saveBtn col-md-1");
+        // $saveBtn17.attr("img", "src=../Assets/images/save.png");
+        $saveBtn17.attr("data-hr", startoftheHour17);
+        console.log($saveBtn17);
+        console.log("******* data-hr value is: " + $saveBtn17.attr("data-hr"));
+        $dayplannerblocks.append($saveBtn17);
+
       }
 
+      init();
 
-      var storedtextarea9 = localStorage.getItem("event9AM");
-      console.log("what is in the local storage var event9AM: " + storedtextarea9);
-
-      //localStorage.setItem("event9AM", "group3 meeting");
-
-      //console.log("what is in the local storage var event9AM: " + storedtextarea9 );
-
-      // If todos were retrieved from localStorage, update the todos array to it
-      if (storedtextarea9 !== null) {
-        console.log("looks like there is data in localstorage so reading it from there");
-        $textarea9.text(storedtextarea9);
-      }
-
-      $dayplannerblocks.append($textarea9);
-
-      // var button = document.createElement("button");
-      // button.textContent = "save";
-      // button.setAttribute("class", "saveBtn col-md-1");
-      // dayplannerblocks.appendChild(button);
-
-      var $saveBtn9 = $("<button>");
-      $saveBtn9.text("Save");
-      $saveBtn9.attr("class", "saveBtn col-md-1");
-      // $saveBtn9.attr("img", "src=../Assets/images/save.png");
-      $dayplannerblocks.append($saveBtn9);
-
-
-      // var $eventform = document.querySelector("#event-form");
-
-      // $eventform.addEventListener("submit", function (event) {
-      //   event.preventDefault();
-
-      //   var eventText = $textarea9.value.trim();
-
-      //   // Return from function early if submitted todoText is blank
-      //   if (eventText === "") {
-      //     return;
-      //   }
-
-      //   localStorage.setItem("event9AM", JSON.stringify(eventText));
-      // });
-
-      // When a element inside of the timeblocks is clicked...
-
-
-      //$dayplannerblocks.addEventListener("click", function (event) {
-      $saveBtn9.click(function () {
-        event.preventDefault();
-        console.log("Hi from save button click");
+      //generic save button function to store respective textarea to localstorage
+      // $saveBtn9.click(function () {
+      $dayplannerblocks.click(function (event) {
+        // event.preventDefault();
+        console.log("Hi from save button click------------------");
         var element = event.target;
         console.log(element);
-        
-        
 
         // If that element is a button...
         if (element.matches("button") === true) {
-          console.log("Hi from save button check and before storing to local storage");
-          localStorage.setItem("event9AM",$textarea9.val() );
+          // console.log("Hi from save button check and before storing to local storage");
+          //var index = element.parentElement.getAttribute("data-hr");
+
+          var indexHr = element.getAttribute("data-hr");
+
+          console.log("index is: " + indexHr);
+
+          if (indexHr === timeblockArray[0]) {
+            localStorage.setItem("event9AM", $textarea9.val());
+          } else if (indexHr === timeblockArray[1]) {
+            localStorage.setItem("event10AM", $textarea10.val());
+          } else if (indexHr === timeblockArray[2]) {
+            localStorage.setItem("event11AM", $textarea11.val());
+          } else if (indexHr === timeblockArray[3]) {
+            localStorage.setItem("event12PM", $textarea12.val());
+          } else if (indexHr === timeblockArray[4]) {
+            localStorage.setItem("event1PM", $textarea13.val());
+          } else if (indexHr === timeblockArray[5]) {
+            localStorage.setItem("event2PM", $textarea14.val());
+          } else if (indexHr === timeblockArray[6]) {
+            localStorage.setItem("event3PM", $textarea15.val());
+          } else if (indexHr === timeblockArray[7]) {
+            localStorage.setItem("event4PM", $textarea16.val());
+          } else if (indexHr === timeblockArray[8]) {
+            localStorage.setItem("event5PM", $textarea17.val());
+          }
+
 
         }
       });
