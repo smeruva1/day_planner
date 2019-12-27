@@ -2,6 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  /* margin: none; */
   }
 
 textarea{
@@ -47,9 +48,9 @@ textarea{
   color: #000000;
   border-top: 1px dashed #000000;
   text-align: center;
-  vertical-align: text-top;
-  /* padding-top: -20px;
-  padding-bottom: 20px; 
+  vertical-align: middle; 
+  padding-top: 20px;
+  /*padding-bottom: 20px; 
   height: 50px; 
   padding: 10px; */
 }
@@ -70,12 +71,15 @@ textarea{
 }
 
 .saveBtn {
+  display: inline-block;
+  background-image : url(../Assets/images/save.png);
   border: line;
   /* border-left: 1px solid black; */
    border-radius: 6px;
   /* border-top-right-radius: 6px;
   border-bottom-right-radius: 6px; */
   background-color: #06AED5;
+  /* background-color: transparent; */
   color: white;
   /* width: 80px; */
    height: 60px;
@@ -86,3 +90,12 @@ textarea{
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
+
+/* 
+.icon-play{
+  background-image : url(../Assets/images/save.png);
+  background-size: cover;
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+} */

@@ -28,16 +28,22 @@
           <p class="lead">A simple calendar app for scheduling your work day</p>
           <p id="currentDay" class="lead"></p>
 
-        </header>
       </div>
     </div>
 
     <!-- Row 2 9 AM Header-->
-    <div class="row" , id="dayplannerblocks">
-      <!-- Timeblocks go here -->
-      <!-- <ul id="timeblocks-list"></ul> -->
+    <form id="event-form" method="POST">
 
-    </div>
+      <div class="row" id="dayplannerblocks">
+
+        <!-- Timeblocks go here -->
+        <!-- <ul id="timeblocks-list"></ul> -->
+        <!-- <div id="dayplannerblocks">
+        </div> -->
+
+      </div>
+    </form>
+
     <!-- </div> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -54,50 +60,15 @@
       console.log($currentDay);
       $currentDay.text(moment().format('dddd MMMM Do YYYY'));
 
-
-      //Now add 9 li to ul
-      //var $timeblockList = $("#timeblocks-list");
-      // var $timeblockList = $("#timeblocks-list");
       var $dayplannerblocks = $("#dayplannerblocks");
-
       var timeblockArray = ["09 AM", "10 AM", "11 AM", "12 PM", "01 PM", "02 PM", "03 PM", "04 PM", "05 PM"];
 
-      var currentIndex = 0;
       //get the current time Array indices and set the flag.
       console.log(moment().format("hh A"));
 
-      for (var i = 0; i < timeblockArray.length; i++) {
-        if (moment().format("hh A") === timeblockArray[i]) {
-          currentIndex = i;
-        }
-      }
-      console.log("current array index is " + currentIndex + " and time is: " + timeblockArray[currentIndex]);
-
-      // // Render a new li for each todo
-      // for (var i = 0; i < timeblockArray.length; i++) {
-
-      //   var startoftheHour = timeblockArray[i];
-
-      //   var li = document.createElement("li");
-      //   li.setAttribute("data-index", i);
-
-      //   var labelHr = document.createElement("label");
-      //   labelHr.textContent = startoftheHour;
-      //   li.appendChild(labelHr);
-
-      //   var textarea = document.createElement("textarea");
-      //   textarea.textContent = " enter your text here";
-      //   li.appendChild(textarea);
-
-      //   var button = document.createElement("button");
-      //   button.textContent = "save";
-      //   li.appendChild(button);
-      //   li.setAttribute("class", "saveBtn");
-
-      //   $timeblockList.append(li);
-      // }
-
-      // 9 AM Block ==============================>>
+      // 9 AM Block =============================>>
+      // 9 AM Block =============================>>
+      // 9 AM Block =============================>>
 
       var startoftheHour9 = timeblockArray[0];
 
@@ -110,7 +81,6 @@
       $labelHr9.text(startoftheHour9);
       $labelHr9.attr("class", "hour col-md-2");
       $dayplannerblocks.append($labelHr9);
-
 
       // var textarea = document.createElement("textarea");
       // textarea.textContent = "";
@@ -132,13 +102,26 @@
       $textarea9.text("");
       $textarea9.attr("class", "textarea col-md-9");
 
-      if (parseInt(currentIndex) < parseInt(0)) {
-        $textarea9.attr("class", "textarea col-md-9 past");
-      } else if (parseInt(currentIndex) === parseInt(0)) {
-        $textarea9.attr("class", "textarea col-md-9 present");
-      } else if (parseInt(currentIndex) > parseInt(0)) {
-        console.log("hi");
+      if (moment().hour() < 9) {
         $textarea9.attr("class", "textarea col-md-9 future");
+      } else if (moment().hour() > 9) {
+        $textarea9.attr("class", "textarea col-md-9 past");
+      } else if (moment().format("hh A") === 9) {
+        $textarea9.attr("class", "textarea col-md-9 present");
+      }
+
+
+      var storedtextarea9 = localStorage.getItem("event9AM");
+      console.log("what is in the local storage var event9AM: " + storedtextarea9);
+
+      //localStorage.setItem("event9AM", "group3 meeting");
+
+      //console.log("what is in the local storage var event9AM: " + storedtextarea9 );
+
+      // If todos were retrieved from localStorage, update the todos array to it
+      if (storedtextarea9 !== null) {
+        console.log("looks like there is data in localstorage so reading it from there");
+        $textarea9.text(storedtextarea9);
       }
 
       $dayplannerblocks.append($textarea9);
@@ -151,7 +134,45 @@
       var $saveBtn9 = $("<button>");
       $saveBtn9.text("Save");
       $saveBtn9.attr("class", "saveBtn col-md-1");
+      // $saveBtn9.attr("img", "src=../Assets/images/save.png");
       $dayplannerblocks.append($saveBtn9);
+
+
+      // var $eventform = document.querySelector("#event-form");
+
+      // $eventform.addEventListener("submit", function (event) {
+      //   event.preventDefault();
+
+      //   var eventText = $textarea9.value.trim();
+
+      //   // Return from function early if submitted todoText is blank
+      //   if (eventText === "") {
+      //     return;
+      //   }
+
+      //   localStorage.setItem("event9AM", JSON.stringify(eventText));
+      // });
+
+      // When a element inside of the timeblocks is clicked...
+
+
+      //$dayplannerblocks.addEventListener("click", function (event) {
+      $saveBtn9.click(function () {
+        event.preventDefault();
+        console.log("Hi from save button click");
+        var element = event.target;
+        console.log(element);
+        
+        
+
+        // If that element is a button...
+        if (element.matches("button") === true) {
+          console.log("Hi from save button check and before storing to local storage");
+          localStorage.setItem("event9AM",$textarea9.val() );
+
+        }
+      });
+
 
 
 
